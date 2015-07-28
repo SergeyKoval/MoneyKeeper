@@ -1,0 +1,45 @@
+<div class="panel panel-primary" ng-controller="summaryController as summaryContr">
+    <div class="panel-heading">Финансовое состояние:</div>
+    <div class="panel-body">
+        <accordion close-others="oneAtATime">
+            <accordion-group ng-repeat="summaryAccount in summaryContr.summary" is-open="summaryAccount.accountExpand">
+                <accordion-heading>
+                    <div class="clearfix account-summary">
+                        <div class="col-lg-7"><strong><em>{{summaryAccount.accountName}}</em></strong></div>
+                        <div class="col-lg-5">
+                            <div class="row currency-summary" ng-repeat="accountSum in summaryAccount.accountSums | orderBy:configContrVM.currencySorting">
+                                <div class="col-lg-3 text-right"><strong>{{configContrVM.getCurrencySymbol(accountSum.currency)}}</strong></div>
+                                <div class="col-lg-9">{{configContrVM.formatCurrencyValue(accountSum.currencyValue)}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </accordion-heading>
+                <div class="account-details">
+                    <div ng-repeat="subAccount in summaryAccount.subAccounts">
+                        <div class="row">
+                            <div class="col-lg-7"><strong><em>{{subAccount.subAccountName}}</em></strong></div>
+                            <div class="col-lg-5">
+                                <div class="row currency-details" ng-repeat="subAccountCurrency in subAccount.subAccountCurrencies | orderBy:configContrVM.currencySorting">
+                                    <div class="col-lg-3 text-right"><strong>{{configContrVM.getCurrencySymbol(subAccountCurrency.currency)}}</strong></div>
+                                    <div class="col-lg-9">{{configContrVM.formatCurrencyValue(subAccountCurrency.currencyValue)}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr ng-hide="$last"/>
+                    </div>
+                </div>
+            </accordion-group>
+        </accordion>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-lg-7">Итого:</div>
+            <div class="col-lg-5">
+                <div class="row money-summary" ng-repeat="userSum in summaryContr.userSums | orderBy:configContrVM.currencySorting">
+                    <div class="col-lg-3 text-right"><strong>{{configContrVM.getCurrencySymbol(userSum.currency)}}</strong></div>
+                    <div class="col-lg-9">{{configContrVM.formatCurrencyValue(userSum.currencyValue)}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="javascript:void(0);">Финансовый менеджер</a>
+        </div>
+        <div id="navbar">
+            <ul class="nav navbar-nav">
+                <li class="divider-vertical"></li>
+                <li ng-class="{ active : configContrVM.isMenuItemActive('/budget')}"><a href="#budget">Бюджет</a></li>
+                <li ng-class="{ active : configContrVM.isMenuItemActive('/history')}"><a href="#history">Учет</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-class="{ active : configContrVM.isMenuItemActive('/profile')}"><a href="#profile">Профиль</a></li>
+                <li><a href="#">Выход</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

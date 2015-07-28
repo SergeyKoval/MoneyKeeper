@@ -1,0 +1,51 @@
+.divider-vertical {
+    height: 50px;
+    border-left: 1px solid #F2F2F2;
+    border-right: 1px solid #FFF;
+}
+
+.accordion-toggle {
+    display:block;
+}
+
+a:hover.accordion-toggle, a:focus.accordion-toggle {
+    text-decoration: none;
+    outline: 0;
+}
+
+accordion .panel-group {
+     margin-bottom: 0;
+}
+
+.panel-primary>.panel-footer {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.account-summary>div, .account-details>div {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.account-summary>div {
+    font-size: 14px;
+}
+
+.account-details>div {
+    font-size: 12px;
+}
+
+.currency-summary>div, .currency-details>div, .money-summary>div {
+    padding-right: 0;
+    padding-left: 5px;
+}
+
+.account-details>div>hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.money-summary, .currency-details {
+    line-height: 15px;
+}
