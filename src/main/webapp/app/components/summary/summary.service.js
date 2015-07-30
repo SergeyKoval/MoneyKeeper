@@ -11,31 +11,11 @@
             accountExpand : false,
             subAccounts : [{
                 subAccountName : 'Наличные',
-                subAccountCurrencies : [
-                {
-                    currency: 'EUR',
-                    currencyValue: 25.38
-                },
-                {
-                    currency: 'BR',
-                    currencyValue: 12365000
-                },
-                {
-                    currency: 'USD',
-                    currencyValue: 5325.8
-                }]
+                subAccountCurrencies : {EUR:25.38, BR:12365000, USD:5325.8}
             },
             {
                 subAccountName : 'Резерв',
-                subAccountCurrencies : [
-                {
-                    currency : 'USD',
-                    currencyValue : 11.25
-                },
-                {
-                    currency : 'EUR',
-                    currencyValue : 18.8
-                }]
+                subAccountCurrencies : {USD:11.25, EUR:18.8}
             }]
         },
         {
@@ -43,27 +23,39 @@
             accountExpand : true,
             subAccounts : [{
                 subAccountName : 'Наличные',
-                subAccountCurrencies : [{
-                    currency : 'BR',
-                    currencyValue : 125968000
-                }]
+                subAccountCurrencies : {USD:11, EUR: 12, BR:125968000}
             }]
         }];
 
         return {
             getSummary: function() {
-                return this.calculateAccountSums(summaryJson);
+                var summary = this.formatSubAccountCurrencyDetails(summaryJson);
+                return this.calculateAccountSums(summary);
+            },
+
+            formatSubAccountCurrencyDetails: function(summaries) {
+                angular.forEach(summaries, function(summary) {
+                    angular.forEach(summary.subAccounts, function(subAccount) {
+                        var subAccountCurrencyDetails = [];
+                        angular.forEach(subAccount.subAccountCurrencies, function(subAccountCurrencyValue, subAccountCurrency) {
+                            subAccountCurrencyDetails.push({currency:subAccountCurrency, currencyValue:subAccountCurrencyValue})
+                        });
+                        subAccount.subAccountCurrencyDetails = subAccountCurrencyDetails;
+                    });
+                });
+
+                return summaries;
             },
 
             calculateAccountSums: function (summaries) {
                 angular.forEach(summaries, function(summary) {
                     var accountSums = {};
                     angular.forEach(summary.subAccounts, function(subAccount) {
-                        angular.forEach(subAccount.subAccountCurrencies, function(subAccountCurrency) {
-                            if (accountSums[subAccountCurrency.currency]) {
-                                accountSums[subAccountCurrency.currency] += subAccountCurrency.currencyValue;
+                        angular.forEach(subAccount.subAccountCurrencies, function(subAccountCurrencyValue, subAccountCurrency) {
+                            if (accountSums[subAccountCurrency]) {
+                                accountSums[subAccountCurrency] += subAccountCurrencyValue;
                             } else {
-                                accountSums[subAccountCurrency.currency] = subAccountCurrency.currencyValue;
+                                accountSums[subAccountCurrency] = subAccountCurrencyValue;
                             }
                         });
                     });

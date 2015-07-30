@@ -19,9 +19,9 @@
                         <div class="row">
                             <div class="col-lg-7"><strong><em>{{subAccount.subAccountName}}</em></strong></div>
                             <div class="col-lg-5">
-                                <div class="row currency-details" ng-repeat="subAccountCurrency in subAccount.subAccountCurrencies | orderBy:configContrVM.currencySorting">
-                                    <div class="col-lg-3 text-right"><strong>{{configContrVM.getCurrencySymbol(subAccountCurrency.currency)}}</strong></div>
-                                    <div class="col-lg-9">{{configContrVM.formatCurrencyValue(subAccountCurrency.currencyValue)}}</div>
+                                <div class="row currency-details" ng-repeat="subAccountCurrencyDetail in subAccount.subAccountCurrencyDetails | orderBy:configContrVM.currencySorting">
+                                    <div class="col-lg-3 text-right"><strong>{{configContrVM.getCurrencySymbol(subAccountCurrencyDetail.currency)}}</strong></div>
+                                    <div class="col-lg-9">{{configContrVM.formatCurrencyValue(subAccountCurrencyDetail.currencyValue)}}</div>
                                 </div>
                             </div>
                         </div>
