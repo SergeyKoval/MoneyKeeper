@@ -7,9 +7,9 @@
                     <div class="clearfix account-summary">
                         <div class="col-lg-7"><strong><em>{{summaryAccount.accountName}}</em></strong></div>
                         <div class="col-lg-5">
-                            <div class="row currency-summary" ng-repeat="accountSum in summaryAccount.accountSums | orderBy:configContrVM.currencySorting">
-                                <div class="col-lg-3 text-right"><strong>{{configContrVM.getCurrencySymbol(accountSum.currency)}}</strong></div>
-                                <div class="col-lg-9">{{configContrVM.formatCurrencyValue(accountSum.currencyValue)}}</div>
+                            <div class="row currency-summary" ng-repeat="accountSum in summaryAccount.accountSums | orderBy:configContr.currencySorting">
+                                <div class="col-lg-3 text-right"><strong>{{configContr.getCurrencySymbol(accountSum.currency)}}</strong></div>
+                                <div class="col-lg-9">{{configContr.formatCurrencyValue(accountSum.currencyValue)}}</div>
                             </div>
                         </div>
                     </div>
@@ -19,9 +19,9 @@
                         <div class="row">
                             <div class="col-lg-7"><strong><em>{{subAccount.subAccountName}}</em></strong></div>
                             <div class="col-lg-5">
-                                <div class="row currency-details" ng-repeat="subAccountCurrencyDetail in subAccount.subAccountCurrencyDetails | orderBy:configContrVM.currencySorting">
-                                    <div class="col-lg-3 text-right"><strong>{{configContrVM.getCurrencySymbol(subAccountCurrencyDetail.currency)}}</strong></div>
-                                    <div class="col-lg-9">{{configContrVM.formatCurrencyValue(subAccountCurrencyDetail.currencyValue)}}</div>
+                                <div class="row currency-details" ng-repeat="subAccountCurrencyDetail in subAccount.subAccountCurrencyDetails | orderBy:configContr.currencySorting">
+                                    <div class="col-lg-3 text-right"><strong>{{configContr.getCurrencySymbol(subAccountCurrencyDetail.currency)}}</strong></div>
+                                    <div class="col-lg-9">{{configContr.formatCurrencyValue(subAccountCurrencyDetail.currencyValue)}}</div>
                                 </div>
                             </div>
                         </div>
@@ -35,9 +35,9 @@
         <div class="row">
             <div class="col-lg-7">Итого:</div>
             <div class="col-lg-5">
-                <div class="row money-summary" ng-repeat="userSum in summaryContr.userSums | orderBy:configContrVM.currencySorting">
-                    <div class="col-lg-3 text-right"><strong>{{configContrVM.getCurrencySymbol(userSum.currency)}}</strong></div>
-                    <div class="col-lg-9">{{configContrVM.formatCurrencyValue(userSum.currencyValue)}}</div>
+                <div class="row money-summary" ng-repeat="userSum in summaryContr.userSums | orderBy:configContr.currencySorting">
+                    <div class="col-lg-3 text-right"><strong>{{configContr.getCurrencySymbol(userSum.currency)}}</strong></div>
+                    <div class="col-lg-9">{{configContr.formatCurrencyValue(userSum.currencyValue)}}</div>
                 </div>
             </div>
         </div>
