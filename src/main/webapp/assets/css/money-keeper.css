@@ -49,3 +49,44 @@ accordion .panel-group {
 .money-summary, .currency-details {
     line-height: 15px;
 }
+
+.header {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    font-weight: bolder;
+    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.table hr {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.footnote {
+    color: #999;
+    font-size: 11px;
+    font-style: normal;
+}
+
+.table .row {
+    margin-bottom: 1px;
+}
+
+.income {
+    color: #009900;
+}
+
+.expenditure {
+    color: #cc0000;
+}
+
+.description {
+    font-size: 12px;
+}
+
+.history-actions-top {
+    padding-bottom: 13px;
+}
