@@ -3,10 +3,12 @@
         .module('mk-config')
         .controller('configController', ConfigController);
 
-    ConfigController.$inject = ['CONFIG', '$location'];
+    ConfigController.$inject = ['CONFIG', '$location', '$rootScope', 'alertService'];
 
-    function ConfigController(CONFIG, $location) {
+    function ConfigController(CONFIG, $location, rootScope, alertService) {
         var vm = this;
+
+        rootScope.closeAlert = alertService.closeAlert;
 
         vm.getCurrencySymbol = function (currencyIdentifier) {
             return CONFIG.CURRENCIES[currencyIdentifier];
@@ -40,6 +42,6 @@
 
         vm.isAmountPositive = function (amount) {
             return amount > 0;
-        }
+        };
     }
 })();

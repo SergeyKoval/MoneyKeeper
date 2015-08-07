@@ -18,6 +18,8 @@
 
     <script src="app/shared/config/config.module.js"></script>
     <script src="app/shared/config/config.controller.js"></script>
+    <script src="app/shared/alert/alert.service.js"></script>
+    <!--<script src="app/shared/popup/popup.controller.js"></script>-->
 
     <script src="app/components/summary/summary.controller.js"></script>
     <script src="app/components/summary/summary.service.js"></script>
@@ -29,8 +31,6 @@
     <link href="assets/css/money-keeper.css" rel="stylesheet">
 
     <title>Финансовый учет</title>
-
-    <!--<base href="/money-keeper/src/main/webapp/">-->
 </head>
 <body>
 
@@ -41,12 +41,12 @@
         <div id="summary" class="col-lg-4" ng-include="'app/components/summary/summary.html'"></div>
 
         <div id="details" class="col-lg-8">
+            <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" ng-attr-dismiss-on-timeout="{{alert.autoClose && 3000 || 5000000}}">{{alert.msg}}</alert>
             <div class="panel panel-default">
                 <div class="panel-body" ng-view></div>
             </div>
         </div>
     </div>
-
 </div>
 
 </body>
