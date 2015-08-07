@@ -9,7 +9,8 @@
                 })
                 .when('/history', {
                     templateUrl: 'app/components/history/history.html',
-                    controller: 'historyController'
+                    controller: 'historyController',
+                    controllerAs: 'historyContr'
                 })
                 .when('/profile', {
                     templateUrl: 'app/components/profile/profile.html',

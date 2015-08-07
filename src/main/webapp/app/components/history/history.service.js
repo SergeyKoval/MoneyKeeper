@@ -45,6 +45,16 @@
                 return this.groupByDay(historyJson);
             },
 
+            removeHistoryItem: function(historyItem) {
+                var historyItemIndex = historyJson.indexOf(historyItem);
+                if(historyItemIndex != -1) {
+                    historyJson.splice(historyItemIndex, 1);
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+
             groupByDay: function(historyItems) {
                 var groupedHistory = {};
                 angular.forEach(historyItems, function(historyItem) {

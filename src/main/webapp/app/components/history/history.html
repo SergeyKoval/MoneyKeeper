@@ -1,56 +1,54 @@
-<div ng-controller="historyController as historyContr">
-    <div class="btn-group history-actions-top" role="group">
-        <a class="btn btn-default">Добавить операцию</a>
-        <a class="btn btn-default">Показать больше операций</a>
+<div class="btn-group history-actions-top" role="group">
+    <a class="btn btn-default">Добавить операцию</a>
+    <a class="btn btn-default">Показать больше операций</a>
+</div>
+
+<div class="table">
+    <div class="row header">
+        <div class="col-md-2">Дата</div>
+        <div class="col-md-2">Сумма</div>
+        <div class="col-md-2">Категория</div>
+        <div class="col-md-4">Комментарий</div>
+        <div class="col-md-2 text-right">Действия</div>
     </div>
 
-    <div class="table">
-        <div class="row header">
-            <div class="col-md-2">Дата</div>
-            <div class="col-md-2">Сумма</div>
-            <div class="col-md-2">Категория</div>
-            <div class="col-md-4">Комментарий</div>
-            <div class="col-md-2 text-right">Действия</div>
-        </div>
-
-        <div ng-repeat="(historyGroup, historyItems) in historyContr.history">
-            <div class="row" ng-repeat="historyItem in historyItems">
-                <div class="col-md-2">
-                    <span ng-hide="!$first">
-                        {{historyGroup}}
-                        <div class="footnote">
-                            {{historyItem.date | date:'EEEE'}}
-                        </div>
-                    </span>
-                </div>
-                <div class="col-md-2">
-                    <div ng-class="{income : configContr.isAmountPositive(historyItem.amount), expenditure : !configContr.isAmountPositive(historyItem.amount)}">
-                        {{configContr.formatPositiveCurrencyValue(historyItem.amount)}}
-                        {{configContr.getCurrencySymbol(historyItem.currency)}}
+    <div ng-repeat="(historyGroup, historyItems) in historyContr.history">
+        <div class="row" ng-repeat="historyItem in historyItems">
+            <div class="col-md-2">
+                <span ng-hide="!$first">
+                    {{historyGroup}}
+                    <div class="footnote">
+                        {{historyItem.date | date:'EEEE'}}
                     </div>
-                    <div class="footnote">{{historyItem.subAccount}}</div>
-                </div>
-                <div class="col-md-2">
-                    <img ng-src="assets/image/{{historyItem.categoryIcon}}">
-                    <span class="description">{{historyItem.category}}</span>
-                    <div class="footnote">{{historyItem.subCategory}}</div>
-                </div>
-                <div class="col-md-4 description">{{historyItem.comment}}</div>
-                <div class="col-md-2 text-center">
-                    <a href="#test" popover="Редактировать" popover-trigger="mouseenter" >
-                        <span class="glyphicon glyphicon-pencil" aria-label="test"></span>
-                    </a>
-                    <a href="#test" popover="Удалить" popover-trigger="mouseenter">
-                        <span class="glyphicon glyphicon-remove" aria-label="test"></span>
-                    </a>
-                </div>
+                </span>
             </div>
-            <hr ng-hide="$last"/>
+            <div class="col-md-2">
+                <div ng-class="{income : configContr.isAmountPositive(historyItem.amount), expenditure : !configContr.isAmountPositive(historyItem.amount)}">
+                    {{configContr.formatPositiveCurrencyValue(historyItem.amount)}}
+                    {{configContr.getCurrencySymbol(historyItem.currency)}}
+                </div>
+                <div class="footnote">{{historyItem.subAccount}}</div>
+            </div>
+            <div class="col-md-2">
+                <img ng-src="assets/image/{{historyItem.categoryIcon}}">
+                <span class="description">{{historyItem.category}}</span>
+                <div class="footnote">{{historyItem.subCategory}}</div>
+            </div>
+            <div class="col-md-4 description">{{historyItem.comment}}</div>
+            <div class="col-md-2 text-center">
+                <a href="" popover="Редактировать" popover-trigger="mouseenter" >
+                    <span class="glyphicon glyphicon-pencil" aria-label="test"></span>
+                </a>
+                <a href="" popover="Удалить" popover-trigger="mouseenter" ng-click="historyContr.deleteHistoryItem(historyItem)">
+                    <span class="glyphicon glyphicon-remove" aria-label="test"></span>
+                </a>
+            </div>
         </div>
+        <hr ng-hide="$last"/>
     </div>
+</div>
 
-    <div class="btn-group" role="group">
-        <a class="btn btn-default">Добавить операцию</a>
-        <a class="btn btn-default">Показать больше операций</a>
-    </div>
+<div class="btn-group" role="group">
+    <a class="btn btn-default">Добавить операцию</a>
+    <a class="btn btn-default">Показать больше операций</a>
 </div>
