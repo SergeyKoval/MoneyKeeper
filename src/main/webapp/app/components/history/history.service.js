@@ -7,6 +7,17 @@
 
     function historyService(http, filter) {
         var historyJson = [{
+            date: 1288214623006,
+            amount: -3600,
+            currency: "USD",
+            category: "Питание",
+            subCategory: "Продукты питания",
+            categoryIcon: "home.gif",
+            account: "Деньги",
+            subAccount: "Наличные",
+            comment: "Детское питание"
+        },
+        {
             date: 1288323624006,
             amount: -5600,
             currency: "USD",
@@ -27,22 +38,14 @@
             account: "Деньги",
             subAccount: "Наличные",
             comment: "Детское питание"
-        },
-        {
-            date: 1288214623006,
-            amount: -5600,
-            currency: "USD",
-            category: "Питание",
-            subCategory: "Продукты питания",
-            categoryIcon: "home.gif",
-            account: "Деньги",
-            subAccount: "Наличные",
-            comment: "Детское питание"
         }];
 
         return {
             getHistory: function(limit) {
-                return this.groupByDay(historyJson);
+                var sortedHistoryItems = filter('orderBy')(historyJson, 'date', true);
+                var startFilterIndex = sortedHistoryItems.length > limit ? sortedHistoryItems.length - limit : 0;
+                var filteredHistoryItems = sortedHistoryItems.slice(startFilterIndex, sortedHistoryItems.length);
+                return this.groupByDay(filteredHistoryItems);
             },
 
             removeHistoryItem: function(historyItem) {

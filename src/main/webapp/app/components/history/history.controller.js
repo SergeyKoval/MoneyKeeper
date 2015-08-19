@@ -14,6 +14,7 @@
 
         vm.selectedHistoryItem = null;
         vm.historyItemsCount = 20;
+        vm.historyItemsIncreaseCount = 10;
         vm.history = historyService.getHistory(vm.historyItemsCount);
 
         vm.deleteHistoryItem = function (historyItem) {
@@ -43,6 +44,11 @@
                     }
                 }
             });
-        }
+        };
+
+        vm.showMore = function () {
+            vm.historyItemsCount += vm.historyItemsIncreaseCount;
+            vm.history = historyService.getHistory(vm.historyItemsCount);
+        };
     }
 })();
