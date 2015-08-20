@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('money-keeper')
-        .controller('popupController', PopupController);
+        .controller('deletePopupController', PopupController);
 
     PopupController.$inject = ['$modalInstance', 'okFunction', 'cancelFunction'];
 
