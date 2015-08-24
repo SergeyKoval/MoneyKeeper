@@ -1,0 +1,22 @@
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-sanitize.js"></script>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+<script src="ui.select.module.js"></script>
+<script src="test.js"></script>
+<script src="ui.select.controller.js"></script>
+<script src="ui.select.directive.js"></script>
+<script src="ui.select.filter.js"></script>
+<script src="ui.select.servie.js"></script>
+
+<link rel="stylesheet" href="test.css">
+
+<main ng-app="app" ng-controller="AppController as app">
+    <ui-select ng-model="app.group.selected" theme="bootstrap">
+        <ui-select-match placeholder="Select or search a group in the list...">{{$select.selected.title}}</ui-select-match>
+        <ui-select-choices breadcrumbs="{{app.breadCrumbs}}" repeat="item in app.groups | filter: $select.search">
+            <span ng-bind-html="item.title | highlight: $select.search"></span>
+            <span ng-bind-html="'('+item.size+' users)'"></span>
+            <button ng-show="item.parent" class="btn btn-default show-child-group" ng-click="app.loadNewData(item, $event)">></button>
+        </ui-select-choices>
+    </ui-select>
+</main> 
