@@ -21,6 +21,8 @@
                         var $select = ctrls[0];
                         var ngModel = ctrls[1];
 
+                        $select.tree = $parse(attrs.items)(scope);
+                        $select.initItemsForLevel(0);
                         $select.onSelectCallback = $parse(attrs.onSelect);
 
                         //From view --> model
@@ -237,58 +239,51 @@
                         return 'choices.html';
                     },
 
-                    compile: function(tElement, tAttrs) {
+                    link: function (scope, element, attrs, $select, transcludeFn) {
+                        attrs.$observe('breadcrumbs', function(val) {
+                            scope.breadcrumbs = scope.$eval(val);
+                        });
+                        scope.goBack = scope.$eval(attrs.onClick);
 
-                        if (!tAttrs.repeat) throw uiSelectMinErr('repeat', "Expected 'repeat' expression.");
+                        // var repeat = RepeatParser.parse(attrs.repeat);
+                        var groupByExp = attrs.groupBy;
 
-                        return function link(scope, element, attrs, $select, transcludeFn) {
+                        //$select.parseRepeatAttr(groupByExp); //Result ready at $select.parserResult
 
-                            attrs.$observe('breadcrumbs', function(val) {
-                                scope.breadcrumbs = scope.$eval(val);
-                            });
+                        if (groupByExp) {
+                            var groups = element.querySelectorAll('.ui-select-choices-group');
+                            if (groups.length !== 1) throw uiSelectMinErr('rows', "Expected 1 .ui-select-choices-group but got '{0}'.", groups.length);
+                            groups.attr('ng-repeat', RepeatParser.getGroupNgRepeatExpression());
+                        }
 
-                            scope.goBack = scope.$eval(attrs.onClick);
+                        var choices = element.querySelectorAll('.ui-select-choices-row');
+                        if (choices.length !== 1) {
+                            throw uiSelectMinErr('rows', "Expected 1 .ui-select-choices-row but got '{0}'.", choices.length);
+                        }
 
-                            // var repeat = RepeatParser.parse(attrs.repeat);
-                            var groupByExp = attrs.groupBy;
+                        choices.attr('ng-repeat', RepeatParser.getNgRepeatExpression($select.parserResult.itemName, '$select.items', $select.parserResult.trackByExp, groupByExp))
+                            .attr('ng-mouseenter', '$select.setActiveItem(' + $select.parserResult.itemName + ')')
+                            .attr('ng-click', '$select.select(' + $select.parserResult.itemName + ')');
 
-                            $select.parseRepeatAttr(attrs.repeat, groupByExp); //Result ready at $select.parserResult
+                        transcludeFn(function(clone) {
 
-                            if (groupByExp) {
-                                var groups = element.querySelectorAll('.ui-select-choices-group');
-                                if (groups.length !== 1) throw uiSelectMinErr('rows', "Expected 1 .ui-select-choices-group but got '{0}'.", groups.length);
-                                groups.attr('ng-repeat', RepeatParser.getGroupNgRepeatExpression());
-                            }
+                            var rowsInner = element.querySelectorAll('.ui-select-choices-row-inner');
+                            if (rowsInner.length !== 1)
+                                throw uiSelectMinErr('rows', "Expected 1 .ui-select-choices-row-inner but got '{0}'.", rowsInner.length);
+                            rowsInner.append(clone);
+                            $compile(element)(scope);
+                        });
 
-                            var choices = element.querySelectorAll('.ui-select-choices-row');
-                            if (choices.length !== 1) {
-                                throw uiSelectMinErr('rows', "Expected 1 .ui-select-choices-row but got '{0}'.", choices.length);
-                            }
+                        scope.$watch('$select.search', function() {
+                            $select.activeIndex = 0;
+                            $select.refresh(attrs.refresh);
+                        });
 
-                            choices.attr('ng-repeat', RepeatParser.getNgRepeatExpression($select.parserResult.itemName, '$select.items', $select.parserResult.trackByExp, groupByExp))
-                                .attr('ng-mouseenter', '$select.setActiveItem(' + $select.parserResult.itemName + ')')
-                                .attr('ng-click', '$select.select(' + $select.parserResult.itemName + ')');
-
-                            transcludeFn(function(clone) {
-
-                                var rowsInner = element.querySelectorAll('.ui-select-choices-row-inner');
-                                if (rowsInner.length !== 1)
-                                    throw uiSelectMinErr('rows', "Expected 1 .ui-select-choices-row-inner but got '{0}'.", rowsInner.length);
-                                rowsInner.append(clone);
-                                $compile(element)(scope);
-                            });
-
-                            scope.$watch('$select.search', function() {
-                                $select.activeIndex = 0;
-                                $select.refresh(attrs.refresh);
-                            });
-
-                            attrs.$observe('refreshDelay', function() {
-                                // $eval() is needed otherwise we get a string instead of a number
-                                var refreshDelay = scope.$eval(attrs.refreshDelay);
-                                $select.refreshDelay = refreshDelay !== undefined ? refreshDelay : uiSelectConfig.refreshDelay;
-                            });
-                        };
+                        attrs.$observe('refreshDelay', function() {
+                            // $eval() is needed otherwise we get a string instead of a number
+                            var refreshDelay = scope.$eval(attrs.refreshDelay);
+                            $select.refreshDelay = refreshDelay !== undefined ? refreshDelay : uiSelectConfig.refreshDelay;
+                        });
                     }
                 };
             }

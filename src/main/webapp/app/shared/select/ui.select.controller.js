@@ -13,6 +13,11 @@
 
                 var EMPTY_SEARCH = '';
 
+                ctrl.breadCrumbs = [{
+                    "id": 0,
+                    "title": "All"
+                }];
+
                 ctrl.placeholder = undefined;
                 ctrl.search = EMPTY_SEARCH;
                 ctrl.activeIndex = 0;
@@ -24,6 +29,8 @@
                 ctrl.disabled = undefined; // Initialized inside uiSelect directive link function
                 ctrl.resetSearchInput = undefined; // Initialized inside uiSelect directive link function
                 ctrl.refreshDelay = undefined; // Initialized inside uiSelectChoices directive link function
+                ctrl.itemProperty = 'item';
+                ctrl.parserResult = RepeatParser.parse('item in $select.items | filter: $select.search');
 
                 ctrl.isEmpty = function() {
                     return angular.isUndefined(ctrl.selected) || ctrl.selected === null || ctrl.selected === '';
@@ -45,6 +52,29 @@
                     }
                 }
 
+                ctrl.initItemsForLevel = function(item, e) {
+                    if (e !== undefined) {
+                        e.stopPropagation();
+                    }
+                    if (item.id) {
+                        ctrl.items = ctrl.tree[item.id];
+                        ctrl.breadCrumbs.push(item);
+                    } else {
+                        ctrl.items = ctrl.tree[item];
+                    }
+                };
+
+                ctrl.breadCrumbBackTo = function(crumb, e) {
+                    for (var index = 0;index < ctrl.breadCrumbs.length; index++) {
+                        if (ctrl.breadCrumbs[index].id == crumb.id) {
+                            break;
+                        }
+                    }
+
+                    ctrl.breadCrumbs.splice(index + 1, ctrl.breadCrumbs.length);
+                    ctrl.initItemsForLevel(ctrl.breadCrumbs[ctrl.breadCrumbs.length -1].id, e);
+                };
+
                 // When the user clicks on ui-select, displays the dropdown list
                 ctrl.activate = function(initSearchValue) {
                     if (!ctrl.disabled) {
@@ -59,7 +89,7 @@
                     }
                 };
 
-                ctrl.parseRepeatAttr = function(repeatAttr, groupByExp) {
+                ctrl.parseRepeatAttr = function(groupByExp) {
                     function updateGroups(items) {
                         ctrl.groups = {};
                         angular.forEach(items, function(item) {
@@ -82,13 +112,9 @@
                     }
 
                     var setItemsFn = groupByExp ? updateGroups : setPlainItems;
-
-                    ctrl.parserResult = RepeatParser.parse(repeatAttr);
-
                     ctrl.isGrouped = !!groupByExp;
-                    ctrl.itemProperty = ctrl.parserResult.itemName;
 
-                    // See https://github.com/angular/angular.js/blob/v1.2.15/src/ng/directive/ngRepeat.js#L259
+                     //See https://github.com/angular/angular.js/blob/v1.2.15/src/ng/directive/ngRepeat.js#L259
                     $scope.$watchCollection(ctrl.parserResult.source, function(items) {
 
                         if (items === undefined || items === null) {

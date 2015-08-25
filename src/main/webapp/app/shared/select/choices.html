@@ -1,6 +1,6 @@
 <ul class="ui-select-choices ui-select-choices-content dropdown-menu" role="menu" aria-labelledby="dLabel" ng-show="$select.items.length > 0">
     <li class="crumbs" ng-show="breadcrumbs.length> 1">
-        <span class="crumb" ng-click="app.breadCrumbBackTo(crumb,$event)" ng-repeat="crumb in breadcrumbs">{{ crumb.title }}</span>
+        <span class="crumb" ng-click="$select.breadCrumbBackTo(crumb,$event)" ng-repeat="crumb in breadcrumbs">{{ crumb.title }}</span>
     </li>
     <li class="ui-select-choices-group">
         <div class="divider" ng-show="$select.isGrouped && $index> 0"></div>
