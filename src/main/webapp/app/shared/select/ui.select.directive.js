@@ -275,6 +275,7 @@
                         });
 
                         scope.$watch('$select.search', function() {
+                            $select.filterItems();
                             $select.activeIndex = 0;
                             $select.refresh(attrs.refresh);
                         });
