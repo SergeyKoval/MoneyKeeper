@@ -261,7 +261,7 @@
                             throw uiSelectMinErr('rows', "Expected 1 .ui-select-choices-row but got '{0}'.", choices.length);
                         }
 
-                        choices.attr('ng-repeat', RepeatParser.getNgRepeatExpression($select.parserResult.itemName, '$select.items', $select.parserResult.trackByExp, groupByExp))
+                        choices.attr('ng-repeat', RepeatParser.getNgRepeatExpression($select.parserResult.itemName, '$select.items | filter: $select.search', $select.parserResult.trackByExp, groupByExp))
                             .attr('ng-mouseenter', '$select.setActiveItem(' + $select.parserResult.itemName + ')')
                             .attr('ng-click', '$select.select(' + $select.parserResult.itemName + ',$event)');
 
@@ -275,7 +275,6 @@
                         });
 
                         scope.$watch('$select.search', function() {
-                            $select.filterItems();
                             $select.activeIndex = 0;
                             $select.refresh(attrs.refresh);
                         });

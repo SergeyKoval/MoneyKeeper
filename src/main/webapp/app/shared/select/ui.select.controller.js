@@ -6,8 +6,8 @@
          * The goal is to limit dependency on the DOM whenever possible and
          * put as much logic in the controller (instead of the link functions) as possible so it can be easily tested.
          */
-        .controller('uiSelectCtrl', ['$scope', '$element', '$timeout', 'RepeatParser', 'uiSelectMinErr', '$filter',
-            function($scope, $element, $timeout, RepeatParser, uiSelectMinErr, $filter) {
+        .controller('uiSelectCtrl', ['$scope', '$element', '$timeout', 'RepeatParser', 'uiSelectMinErr',
+            function($scope, $element, $timeout, RepeatParser, uiSelectMinErr) {
 
                 var ctrl = this;
 
@@ -76,10 +76,6 @@
 
                     ctrl.breadCrumbs.splice(index + 1, ctrl.breadCrumbs.length);
                     ctrl.initItemsForLevel(ctrl.breadCrumbs[ctrl.breadCrumbs.length -1].id, e);
-                };
-
-                ctrl.filterItems = function() {
-                    ctrl.items = $filter('filter')(ctrl.tree[ctrl.levelId], {title: ctrl.search});
                 };
 
                 // When the user clicks on ui-select, displays the dropdown list
