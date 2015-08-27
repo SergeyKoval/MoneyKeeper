@@ -90,3 +90,19 @@ accordion .panel-group {
 .history-actions-top {
     padding-bottom: 13px;
 }
+
+.form-row {
+    margin-top: 15px;
+}
+
+.input-group-btn .btn-default {
+    background-color: #e6e6e6;
+}
+
+.modal-history {
+    width: 800px;
+}
+
+#historyPopup .table, #historyPopup .well {
+    margin-bottom: 0;
+}

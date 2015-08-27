@@ -1,11 +1,11 @@
 (function () {
     angular
         .module('money-keeper')
-        .controller('deletePopupController', DeletePopupController);
+        .controller('historyPopupController', HistoryPopupController);
 
-    DeletePopupController.$inject = ['$modalInstance', 'okFunction', 'cancelFunction'];
+    HistoryPopupController.$inject = ['$modalInstance', 'okFunction', 'cancelFunction'];
 
-    function DeletePopupController(modalInstance, okFunction, cancelFunction) {
+    function HistoryPopupController(modalInstance, okFunction, cancelFunction) {
         var vm = this;
 
         vm.ok = function() {

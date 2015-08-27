@@ -55,11 +55,11 @@
             vm.selectedHistoryItem = historyItem;
             var modalInstance = modal.open({
                 animation: true,
-                templateUrl: 'app/components/history/popup-edit.html',
-                controller: 'popupController',
-                controllerAs: 'popupContr',
+                templateUrl: 'app/components/history/popup/popup-edit.html',
+                controller: 'historyPopupController',
+                controllerAs: 'historyPopupContr',
                 backdrop: 'static',
-                size: 'sm',
+                size: 'history',
                 resolve: {
                     okFunction: function () {
                         return function () {

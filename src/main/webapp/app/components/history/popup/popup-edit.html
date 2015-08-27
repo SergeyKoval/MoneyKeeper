@@ -1,0 +1,137 @@
+<div class="modal-header">
+    <h3 class="modal-title">Добавление</h3>
+</div>
+<div id="historyPopup" class="modal-body">
+    <div class="table">
+        <div class="row">
+            <div class="col-md-5">
+                <div style="display:inline-block;">
+                    <datepicker ng-model="dt" starting-day="1" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></datepicker>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <tabset justified="true">
+                    <tab heading="Расход">
+                        <div class="input-group form-row">
+                            <div class="input-group-btn" dropdown>
+                                <button id="expenditureCurrency" type="button" class="btn btn-default" dropdown-toggle>
+                                    $ <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="expenditureCurrency">
+                                    <li role="menuitem"><a href="#">Action</a></li>
+                                    <li role="menuitem"><a href="#">Another action</a></li>
+                                    <li role="menuitem"><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li role="menuitem"><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Сумма">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" class="form-control" placeholder="Счет">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" class="form-control" placeholder="Категория">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" class="form-control" placeholder="Комментарий">
+                        </div>
+                    </tab>
+                    <tab heading="Доход">
+                        <div class="input-group form-row">
+                            <div class="input-group-btn" dropdown>
+                                <button id="incomeCurrency" type="button" class="btn btn-default" dropdown-toggle>
+                                    $ <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="incomeCurrency">
+                                    <li role="menuitem"><a href="#">Action</a></li>
+                                    <li role="menuitem"><a href="#">Another action</a></li>
+                                    <li role="menuitem"><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li role="menuitem"><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Сумма">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" class="form-control" placeholder="Счет">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" class="form-control" placeholder="Категория">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" class="form-control" placeholder="Комментарий">
+                        </div>
+                    </tab>
+                    <tab heading="Перевод">
+                        <div class="input-group form-row">
+                            <div class="input-group-btn" dropdown>
+                                <button id="transferCurrency" type="button" class="btn btn-default" dropdown-toggle>
+                                    $ <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="transferCurrency">
+                                    <li role="menuitem"><a href="#">Action</a></li>
+                                    <li role="menuitem"><a href="#">Another action</a></li>
+                                    <li role="menuitem"><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li role="menuitem"><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Сумма">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" class="form-control" placeholder="Со счета">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" class="form-control" placeholder="На счет">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" class="form-control" placeholder="Комментарий">
+                        </div>
+                    </tab>
+                    <tab heading="Обмен">
+                        <div class="input-group form-row">
+                            <div class="input-group-btn" dropdown>
+                                <button id="exchangeExpenditureCurrency" type="button" class="btn btn-default" dropdown-toggle>
+                                    $ <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="exchangeExpenditureCurrency">
+                                    <li role="menuitem"><a href="#">Action</a></li>
+                                    <li role="menuitem"><a href="#">Another action</a></li>
+                                    <li role="menuitem"><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li role="menuitem"><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Сумма">
+                        </div>
+                        <div class="input-group form-row">
+                            <div class="input-group-btn" dropdown>
+                                <button id="exchangeIncomeCurrency" type="button" class="btn btn-default" dropdown-toggle>
+                                    $ <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="exchangeIncomeCurrency">
+                                    <li role="menuitem"><a href="#">Action</a></li>
+                                    <li role="menuitem"><a href="#">Another action</a></li>
+                                    <li role="menuitem"><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li role="menuitem"><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Сумма">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" class="form-control" placeholder="Cчет">
+                        </div>
+                        <div class="form-row">
+                            <input type="text" class="form-control" placeholder="Комментарий">
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+
+</div>

@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-4 description">{{historyItem.comment}}</div>
             <div class="col-md-2 text-center">
-                <a href="" popover="Редактировать" popover-trigger="mouseenter" >
+                <a href="" popover="Редактировать" popover-trigger="mouseenter" ng-click="historyContr.openEditPopup(historyItem)">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </a>
                 <a href="" popover="Удалить" popover-trigger="mouseenter" ng-click="historyContr.deleteHistoryItem(historyItem)">
