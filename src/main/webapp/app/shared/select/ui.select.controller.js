@@ -175,19 +175,22 @@
                 };
 
                 // When the user clicks on an item inside the dropdown
-                ctrl.select = function(item) {
+                ctrl.select = function(item, event) {
+                    if (item.parent) {
+                        ctrl.initItemsForLevel(item, event);
+                    } else {
+                        var locals = {};
+                        locals[ctrl.parserResult.itemName] = item;
 
-                    var locals = {};
-                    locals[ctrl.parserResult.itemName] = item;
+                        ctrl.onSelectCallback($scope, {
+                            $item: item,
+                            $model: ctrl.parserResult.modelMapper($scope, locals)
+                        });
 
-                    ctrl.onSelectCallback($scope, {
-                        $item: item,
-                        $model: ctrl.parserResult.modelMapper($scope, locals)
-                    });
-
-                    ctrl.selected = item;
-                    ctrl.close();
-                    // Using a watch instead of $scope.ngModel.$setViewValue(item)
+                        ctrl.selected = item;
+                        ctrl.close();
+                        // Using a watch instead of $scope.ngModel.$setViewValue(item)
+                    }
                 };
 
                 // Closes the dropdown

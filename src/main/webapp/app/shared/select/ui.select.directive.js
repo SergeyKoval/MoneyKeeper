@@ -263,7 +263,7 @@
 
                         choices.attr('ng-repeat', RepeatParser.getNgRepeatExpression($select.parserResult.itemName, '$select.items', $select.parserResult.trackByExp, groupByExp))
                             .attr('ng-mouseenter', '$select.setActiveItem(' + $select.parserResult.itemName + ')')
-                            .attr('ng-click', '$select.select(' + $select.parserResult.itemName + ')');
+                            .attr('ng-click', '$select.select(' + $select.parserResult.itemName + ',$event)');
 
                         transcludeFn(function(clone) {
 
