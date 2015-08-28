@@ -22,6 +22,31 @@ angular.module('app', ['ui.select', 'ngSanitize'])
         //
         this.group = {};
 
+        var id = 1;
+        ctrl.newTree = {};
+
+        ctrl.categories = [{
+            id: 1,
+            category: "category1",
+            subCategories: [{category: "category2"}, {category: "category3"}]
+        }, {
+            id: 2,
+            category: "category4",
+            subCategories: [{category: "category5"}, {category: "category6"}, {category: "category7"}]
+        }];
+
+        var rootCategories = [];
+        angular.forEach(ctrl.categories, function(category) {
+            var subCategories = [];
+            var rootCategory = {id:id++, title:category.category, parent:true};
+            rootCategories.push(rootCategory);
+            angular.forEach(category.subCategories, function(subCategory) {
+                subCategories.push({id:id++, title:subCategory.category, parentTitle:category.category, parent:false});
+            });
+            ctrl.newTree[rootCategory.id] = subCategories;
+        });
+        ctrl.newTree[0] = rootCategories;
+
         ctrl.tree = {
             0: [{
                 "id": 1,
