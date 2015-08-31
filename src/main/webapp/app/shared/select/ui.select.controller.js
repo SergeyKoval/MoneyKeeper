@@ -6,8 +6,8 @@
          * The goal is to limit dependency on the DOM whenever possible and
          * put as much logic in the controller (instead of the link functions) as possible so it can be easily tested.
          */
-        .controller('uiSelectCtrl', ['$scope', '$element', '$timeout', 'RepeatParser', 'uiSelectMinErr',
-            function($scope, $element, $timeout, RepeatParser, uiSelectMinErr) {
+        .controller('uiSelectCtrl', ['$scope', '$element', '$timeout', 'RepeatParser', 'uiSelectMinErr', '$filter',
+            function($scope, $element, $timeout, RepeatParser, uiSelectMinErr, $filter) {
 
                 var ctrl = this;
 
@@ -20,6 +20,7 @@
 
                 ctrl.placeholder = undefined;
                 ctrl.search = EMPTY_SEARCH;
+                ctrl.rootSearch = undefined;
                 ctrl.activeIndex = 0;
                 ctrl.items = [];
                 ctrl.levelId = undefined;
@@ -53,6 +54,18 @@
                     }
                 }
 
+                ctrl.initSource = function (sourceTree) {
+                    var rootSearchItems = [];
+                    ctrl.tree = sourceTree;
+                    angular.forEach(sourceTree, function(sourceTreeGroup) {
+                        angular.forEach(sourceTreeGroup, function(sourceTreeItem) {
+                            rootSearchItems.push(sourceTreeItem);
+                        });
+                    });
+                    ctrl.rootSearch = $filter('orderBy')(rootSearchItems, 'title', false);
+                    ctrl.initItemsForLevel(0);
+                };
+
                 ctrl.initItemsForLevel = function(item, e) {
                     if (e !== undefined) {
                         e.stopPropagation();
@@ -65,6 +78,7 @@
                         ctrl.items = ctrl.tree[item];
                         ctrl.levelId = item;
                     }
+                    ctrl.filterItems();
                 };
 
                 ctrl.breadCrumbBackTo = function(crumb, e) {
@@ -76,6 +90,16 @@
 
                     ctrl.breadCrumbs.splice(index + 1, ctrl.breadCrumbs.length);
                     ctrl.initItemsForLevel(ctrl.breadCrumbs[ctrl.breadCrumbs.length -1].id, e);
+                };
+
+                ctrl.filterItems = function() {
+                    var itemsToFilter;
+                    if (ctrl.levelId === 0 && ctrl.search.length > 0) {
+                        itemsToFilter = ctrl.rootSearch;
+                    } else {
+                        itemsToFilter = ctrl.tree[ctrl.levelId];
+                    }
+                    ctrl.items = $filter('filter')(itemsToFilter, {title: ctrl.search});
                 };
 
                 // When the user clicks on ui-select, displays the dropdown list

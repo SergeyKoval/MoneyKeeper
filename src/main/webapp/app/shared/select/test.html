@@ -13,7 +13,7 @@
 <main ng-app="app" ng-controller="AppController as app">
     <div><button value="test" ng-click="app.test()"></button></div>
     <ui-select ng-model="app.group.selected" theme="bootstrap" items="app.newTree">
-        <ui-select-match placeholder="Select or search a group in the list...">{{$select.selected.parentTitle + ' -> ' + $select.selected.title}}</ui-select-match>
+        <ui-select-match placeholder="Select or search a group in the list...">{{$select.selected.parentTitle + ' >> ' + $select.selected.title}}</ui-select-match>
         <ui-select-choices breadcrumbs="{{$select.breadCrumbs}}">
             <span ng-bind-html="item.title | highlight: $select.search"></span>
             <button ng-show="item.parent" class="btn btn-default show-child-group" ng-click="$select.initItemsForLevel(item, $event)">></button>

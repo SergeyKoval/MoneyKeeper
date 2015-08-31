@@ -32,7 +32,11 @@ angular.module('app', ['ui.select', 'ngSanitize'])
         }, {
             id: 2,
             category: "category4",
-            subCategories: [{category: "category5"}, {category: "category6"}, {category: "category7"}]
+            subCategories: [{category: "category5"}, {category: "category6"}, {category: "another"}]
+        }, {
+            id: 3,
+            category: "newValue",
+            subCategories: [{category: "newValue1"}, {category: "newValue2"}, {category: "newValue3"}]
         }];
 
         var rootCategories = [];
